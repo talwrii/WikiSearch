@@ -77,7 +77,7 @@ def get_summary_text(wiki_soup):
 
 def build_parser():
     PARSER = argparse.ArgumentParser(description='')
-    PARSER.add_argument('search', type=str)
+    PARSER.add_argument('search', type=str, nargs='*')
     PARSER.add_argument('--no-toc', action='store_false', default=True, dest='toc')
     return PARSER
 
@@ -88,7 +88,8 @@ def main(argv=None):
 
     args = build_parser().parse_args()
 
-    wiki_search(args.search, args.toc)
+    search = ' '.join(args.search).replace(' ', '_')
+    wiki_search(search, args.toc)
 
 if __name__ == '__main__':
     #Pass command line args to main
